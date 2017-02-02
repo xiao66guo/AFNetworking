@@ -32,8 +32,12 @@
 /**
  `AFURLSessionManager` creates and manages an `NSURLSession` object based on a specified `NSURLSessionConfiguration` object, which conforms to `<NSURLSessionTaskDelegate>`, `<NSURLSessionDataDelegate>`, `<NSURLSessionDownloadDelegate>`, and `<NSURLSessionDelegate>`.
 
- ## Subclassing Notes
+ ———— AFURLSessionManager 创建和管理一个 NSURLSession 对象并给予一个指定的 NSURLSessionConfiguration 对象
+ 
+ ## Subclassing Notes  子类的注释
 
+ ———— 该子类是一个 AFHTTPSessionManager 的基类，增加了一些 HTTP 请求的方法
+ 
  This is the base class for `AFHTTPSessionManager`, which adds functionality specific to making HTTP requests. If you are looking to extend `AFURLSessionManager` specifically for HTTP, consider subclassing `AFHTTPSessionManager` instead.
 
  ## NSURLSession & NSURLSessionTask Delegate Methods
@@ -113,6 +117,8 @@ NS_ASSUME_NONNULL_BEGIN
 /**
  The security policy used by created session to evaluate server trust for secure connections. `AFURLSessionManager` uses the `defaultPolicy` unless otherwise specified.
  */
+
+// 安全策略，在 HTTPS 访问时需要
 @property (nonatomic, strong) AFSecurityPolicy *securityPolicy;
 
 #if !TARGET_OS_WATCH
@@ -123,6 +129,8 @@ NS_ASSUME_NONNULL_BEGIN
 /**
  The network reachability manager. `AFURLSessionManager` uses the `sharedManager` by default.
  */
+
+// 检测网络的连接的状态
 @property (readwrite, nonatomic, strong) AFNetworkReachabilityManager *reachabilityManager;
 #endif
 
